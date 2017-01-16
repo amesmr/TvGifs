@@ -102,6 +102,7 @@ $(document).ready(function() {
     $("#images").empty();
     $("#list").empty();
     $(".dropdown").hide();
+    $("#newShowName").val("")
   });
 
   $("#addShow").on("click", function() {
