@@ -14,7 +14,7 @@ function displayShow(title) {
 
   var formattedTitle = title.replace(" ", "+").toLowerCase();
   // build the query
-  var queryURL = "http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=" + formattedTitle + "&limit=10&offset=" + showOffset[showsAry.indexOf(title)];
+  var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=" + formattedTitle + "&limit=10&offset=" + showOffset[showsAry.indexOf(title)];
   console.log("queryURL = " + queryURL);
 
   $.ajax({
@@ -114,7 +114,7 @@ $(document).ready(function() {
       alert("This show is aready on the page");
     } else {
       // Let's find out if this is really a tv show
-      var queryURL = "http://api.tvmaze.com/search/shows?q=" + newName;
+      var queryURL = "https://api.tvmaze.com/search/shows?q=" + newName;
       $.ajax({
         url: queryURL,
         method: "GET"
