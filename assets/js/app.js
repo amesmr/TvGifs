@@ -98,14 +98,17 @@ $(document).ready(function() {
     displayShow($(this).data("title"));
   });
 
-  $("#clear").on("click", function() {
+  $("#clear").click(function(event) {
+    event.preventDefault();
+  });
+  $("#clear").on("click", function(event) {
     $("#images").empty();
     $("#list").empty();
     $(".dropdown").hide();
     $("#newShowName").val("")
   });
-
-  $("#addShow").on("click", function() {
+  $("#addShow").on("click", function(event) {
+    event.preventDefault();
     var newName = $("#newShowName").val().toUpperCase();
     var i;
     // go ahead and clear out the gifs
@@ -163,6 +166,7 @@ $(document).ready(function() {
     }
     // clear out the text box
     $("#newShowName").val("");
+    return false;
   });
 
   $("body").on("click", ".list-item", function() {
