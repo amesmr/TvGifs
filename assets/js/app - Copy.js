@@ -11,7 +11,7 @@ function initPage() {
 }
 
 function ReSize() {
-  if ($(window).width() <= 480) {
+  if ($(window).width() <= '480') {
     $("button").attr("class", "btn btn-primary btn-xs");
     $("#tv").css({
       "height": "125px",
@@ -32,14 +32,7 @@ function ReSize() {
     });
     $("#add").attr("class", "col-xs-8");
     $("#clear").attr("class", "col-xs-3");
-    $(".gif").each(function() {
-      if ($(this).attr("state") == "still") {
-        $(this).attr("src", $(this).attr("small_still_url"));
-      } else {
-        $(this).attr("src", $(this).attr("small_animated_url"));
-      }
-    });
-  } else if ($(window).width() <= 768) {
+  } else if ($(window).width() <= '768') {
     $("button").attr("class", "btn btn-primary btn-sm");
     $("#tv").css({
       "height": "200px",
@@ -60,14 +53,7 @@ function ReSize() {
     });
     $("#add").attr("class", "col-sm-3");
     $("#clear").attr("class", "col-sm-1");
-    $(".gif").each(function() {
-      if ($(this).attr("state") == "still") {
-        $(this).attr("src", $(this).attr("small_still_url"));
-      } else {
-        $(this).attr("src", $(this).attr("small_animated_url"));
-      }
-    });
-  } else if ($(window).width() <= 980) {
+  } else if ($(this).width() <= '980') {
     $("#tv").css({
       "height": "220px",
       "top": "10px",
@@ -77,25 +63,10 @@ function ReSize() {
       "height": "165px",
       "left": "-271px",
     });
-    $("#add").css({
-      "top": "38px",
-      "left": "-160px",
-    });
-    $("#clear").css({
-      "top": "5px",
-      "left": "-160px",
-    });
     $("button").attr("class", "btn btn-primary btn-md");
     $("#images").attr("class", "col-md-9");
     $("#add").attr("class", "col-md-2");
     $("#clear").attr("class", "col-md-1");
-    $(".gif").each(function() {
-      if ($(this).attr("state") == "still") {
-        $(this).attr("src", $(this).attr("still_url"));
-      } else {
-        $(this).attr("src", $(this).attr("animated_url"));
-      }
-    });
   } else {
     $("#tv").css({
       "height": "220px",
@@ -106,25 +77,10 @@ function ReSize() {
       "height": "165px",
       "left": "-271px",
     });
-    $("#add").css({
-      "top": "40px",
-      "left": "-160px",
-    });
-    $("#clear").css({
-      "top": "5px",
-      "left": "-160px",
-    });
     $("button").attr("class", "btn btn-primary btn-md");
     $("#images").attr("class", "col-lg-8");
     $("#add").attr("class", "col-lg-2");
     $("#clear").attr("class", "col-lg-1");
-    $(".gif").each(function() {
-      if ($(this).attr("state") == "still") {
-        $(this).attr("src", $(this).attr("still_url"));
-      } else {
-        $(this).attr("src", $(this).attr("animated_url"));
-      }
-    });
   }
 }
 
@@ -144,38 +100,31 @@ function displayShow(title) {
     // response should be an array of 10 objects
     var stillImageUrl;
     var animatedImageUrl;
-    var smallStillImageUrl;
-    var smallAnimatedImageUrl;
-    var thisStill;
 
     // so that we don't keep reaching for the same 10 gifs
     showOffset[showsAry.indexOf(title)] += 10;
 
-    // present the user with the 10 gifs
-    for (i = 0; i < response.data.length; i++) {
-      smallStillImageUrl = response.data[i].images.fixed_height_small_still.url;
-      smallAnimatedImageUrl = response.data[i].images.fixed_height_small.url;
-      stillImageUrl = response.data[i].images.original_still.url;
-      animatedImageUrl = response.data[i].images.original.url;
-      if (screen.width <= '768') {
+    // present the user with up the 10 gifs
+    for (i = 0; i < 10; i++) {
+      if (screen.width <= '480') {
         // use the small gifs for phones
-        thisStill = smallStillImageUrl;
+        stillImageUrl = response.data[i].images.fixed_height_small_still.url;
+        animatedImageUrl = response.data[i].images.fixed_height_small.url;
       } else {
-        thisStill = stillImageUrl;
+        stillImageUrl = response.data[i].images.original_still.url;
+        animatedImageUrl = response.data[i].images.original.url;
       }
       // in this row, create an image for the show
       var img = $("<img>");
       // a p element to hold the rating
-      var p = $("<p>");
+      var img = $("<p>");
       // we have to append first, then we can set attributes
       $("#images").append(img).append(p);
       // configure the gif
-      img.attr("src", thisStill);
+      img.attr("src", stillImageUrl);
       img.attr("alt", title);
       img.attr("still_url", stillImageUrl);
       img.attr("animated_url", animatedImageUrl);
-      img.attr("small_still_url", smallStillImageUrl);
-      img.attr("small_animated_url", smallAnimatedImageUrl);
       img.attr("class", "gif");
       img.attr("state", "still");
       // add the rating
@@ -258,7 +207,7 @@ $(document).ready(function() {
         method: "GET"
       }).done(function(response) {
         // console.log(response);
-
+        
         // Good test shows:
         // "top gear" will return the full list of 10 candidates
         // "son of zorn" will return a single candidate (simply gets added without presenting the list)
@@ -282,33 +231,25 @@ $(document).ready(function() {
           for (i = 0; i < response.length; i++) {
             // console.log("i=" + i);
             var item = $("<li>");
-            var image = $("<img>");
-            var p = $("<p>");
             item.addClass("list-item list-image");
+            // clear it out from the last time
+            var htmlContent = "";
             item.attr("showName", response[i].show.name);
-            p.addClass("col-xs-10 col-sm-10 col-md-10 col-lg-10");
-            image.addClass("col-xs-2 col-sm-2 col-md-2 col-lg-2");
-            image.attr("src", response[i].show.image.medium);
-            image.attr("alt", response[i].show.name);
-            image.attr("height", "100");
-            // clear it out from the last time through the loop
-            var imgContent = "";
-            var pContent = "";
-
-            pContent = "<strong>Show Name: </strong>" + response[i].show.name + "<br><strong>Premier Date: </strong>" + response[i].show.premiered + "<br>";
+            if (response[i].show.image != null) {
+              htmlContent += "<img class=\"col-xs-2 col-sm-2 col-md-2 col-lg-2\"  src=" + response[i].show.image.medium + " alt=" + response[i].show.name + " height=100<p class=\"col-xs-10 col-sm-10 col-md-10 col-lg-10\">";
+            }
+            htmlContent += " <strong>Show Name: </strong>" + response[i].show.name + "<br><strong>Premier Date: </strong>" + response[i].show.premiered + "<br>";
             // not all shows will have a network associated with them
             // either way, put an hr tag on the end to separate list items
             if (response[i].show.network != null) {
-              pContent += "<strong>Network: </strong>" + response[i].show.network.name + "<br><strong>Summary: </strong>" + response[i].show.summary + "<hr>";
+              htmlContent += "<strong>Network: </strong>" + response[i].show.network.name + "<br><strong>Summary: </strong>" + response[i].show.summary + "<hr></p>";
             } else {
-              pContent += "<strong>Summary: </strong>" + response[i].show.summary + "<hr>";
+              htmlContent += "<strong>Summary: </strong>" + response[i].show.summary + "<hr></p>";
             }
             // set the content
-            item.html(pContent);
-            // add to page
-            $(item).prependTo($("#list"));
-            $(image).prependTo($(item));
-            $(image).append(p);
+            item.html(htmlContent);
+            // append to page
+            $("#list").append(item);
           }
           // show the hidden dropdown list
           $(".dropdown").show();
@@ -329,12 +270,12 @@ $(document).ready(function() {
 
   $("body").on("click touch", ".list-item", function() {
     var show = $(this).attr("showName")
-      // add the button to the page
+    // add the button to the page
     addButton(show.toUpperCase());
     // push the correct data to the arrays
     showsAry.push(show.toUpperCase());
     showOffset.push(0)
-      // clear out and hide the dropdown list
+    // clear out and hide the dropdown list
     $("#list").empty();
     $(".dropdown").hide();
 
