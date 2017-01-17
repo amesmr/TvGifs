@@ -113,6 +113,7 @@ $(document).ready(function() {
     var i;
     // go ahead and clear out the gifs
     $("#images").empty();
+    $("#list").empty();
     // check to see if it is already on the page
     if (showsAry.indexOf(newName) >= 0) {
       alert("This show is aready on the page");

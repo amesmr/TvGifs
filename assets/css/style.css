@@ -1,12 +1,46 @@
-
+/*
 .list-images {
     height: 30px;
 }
 
 .gif {
     height: 200px;
+}*/
+.tvRow {
+    position: relative;
+
+}
+#tv {
+    position: fixed;
+    height: 220px;
+    top:10px;
+    left: 10px;
+}
+#lucy {
+    position: fixed;
+    height: 165px;
+    top: 31px;
+    left: 40px;
+    z-index: -1;
+}
+body {
+    background-color: lightblue;
+    -webkit-animation:change 2s infinite; /* Safari 4.0 - 8.0 */
+    animation:change 2s infinite;    
+    animation-direction: alternate;
 }
 
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes change {
+    from {background-color: lightblue;}
+    to {background-color: lightseagreen;}
+}
+
+/* Standard syntax */
+@keyframes change {
+    from {background-color: lightblue;}
+    to {background-color: lightseagreen;}
+}
 /**************************************************************************/
 /**************************************************************************/
 /*********************** full-size monitor Starts here!! ******************/
