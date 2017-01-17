@@ -6,21 +6,17 @@
 .gif {
     height: 200px;
 }*/
-.tvRow {
-    position: relative;
-
-}
 #tv {
-    position: fixed;
+    position: relative;
     height: 220px;
     top:10px;
     left: 10px;
 }
 #lucy {
-    position: fixed;
+    position: relative;
     height: 165px;
-    top: 31px;
-    left: 40px;
+    top: 0;
+    left: -287px;
     z-index: -1;
 }
 body {
