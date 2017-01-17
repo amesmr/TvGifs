@@ -253,7 +253,7 @@ $(document).ready(function() {
     return false;
   });
 
-  $("body").on("click", ".list-item", function() {
+  $("body").on("click touch", ".list-item", function() {
     var show = $(this).attr("showName")
     addButton(show.toUpperCase());
     // clear out and hide the dropdown list
