@@ -159,7 +159,7 @@ $(document).ready(function() {
 
   initPage();
 
-  $("body").on("click", "img", function() {
+  $("body").on("click touch", "img", function() {
     if ($(this).attr("state") == "still") {
       $(this).attr("src", $(this).attr("animated_url"));
       $(this).attr("state", "animated");
@@ -169,7 +169,7 @@ $(document).ready(function() {
     }
   });
 
-  $("body").on("click", "#shows", function() {
+  $("body").on("click touch", "#shows", function() {
     $("#images").empty();
     $(".dropdown-content").empty();
     $(".dropdown").hide();
