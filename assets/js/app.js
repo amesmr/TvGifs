@@ -13,7 +13,7 @@ function initPage() {
 function ReSize() {
   if ($(window).width() <= '480') {
     $("button").attr("class", "btn btn-primary btn-xs");
-    $("#tv ").css({
+    $("#tv").css({
       "height": "125px",
       "top": "5px",
       "left": "5px",
@@ -22,23 +22,39 @@ function ReSize() {
       "height": "100px",
       "left": "-168px",
     });
+    $("#add").css({
+      "top": "5px",
+      "left": "10px",
+    });
+    $("#clear").css({
+      "top": "5px",
+      "left": 0,
+    });
     $("#add").attr("class", "col-xs-8");
     $("#clear").attr("class", "col-xs-3");
   } else if ($(window).width() <= '768') {
     $("button").attr("class", "btn btn-primary btn-sm");
-    $("#tv ").css({
+    $("#tv").css({
       "height": "200px",
       "top": "5px",
-      "left": "20px",
+      "left": "-248px",
     });
     $("#lucy").css({
       "height": "150px",
-      "left": "-250px",
+      "left": "-518px",
     });
-    $("#add").attr("class", "col-sm-9");
-    $("#clear").attr("class", "col-sm-3");
-  } else {
-    $("#tv ").css({
+    $("#add").css({
+      "top": "5px",
+      "left": "300px",
+    });
+    $("#clear").css({
+      "top": "5px",
+      "left": "290px",
+    });
+    $("#add").attr("class", "col-sm-3");
+    $("#clear").attr("class", "col-sm-1");
+  } else if ($(this).width() <= '980') {
+    $("#tv").css({
       "height": "220px",
       "top": "10px",
       "left": "25px",
@@ -51,6 +67,20 @@ function ReSize() {
     $("#images").attr("class", "col-md-9");
     $("#add").attr("class", "col-md-2");
     $("#clear").attr("class", "col-md-1");
+  } else {
+    $("#tv").css({
+      "height": "220px",
+      "top": "10px",
+      "left": "25px",
+    });
+    $("#lucy").css({
+      "height": "165px",
+      "left": "-271px",
+    });
+    $("button").attr("class", "btn btn-primary btn-md");
+    $("#images").attr("class", "col-lg-8");
+    $("#add").attr("class", "col-lg-2");
+    $("#clear").attr("class", "col-lg-1");
   }
 }
 
@@ -141,6 +171,8 @@ $(document).ready(function() {
 
   $("body").on("click", "#shows", function() {
     $("#images").empty();
+    $(".dropdown-content").empty();
+    $(".dropdown").hide();
     displayShow($(this).data("title"));
   });
 
@@ -160,6 +192,9 @@ $(document).ready(function() {
     // go ahead and clear out the gifs
     $("#images").empty();
     $("#list").empty();
+    if (newName == "") {
+      return false;
+    }
     // check to see if it is already on the page
     if (showsAry.indexOf(newName) >= 0) {
       alert("This show is aready on the page");
@@ -177,7 +212,7 @@ $(document).ready(function() {
           return false;
         } else if (response.length > 1) {
           // show the user's the options and let them pick the correct one
-          $("#dropbtn").html("Which \"" + response[0].show.name + "?\"");
+          $("#dropbtn").html("Which \"" + response[0].show.name + "?\"<br>");
           for (i = 0; i < response.length; i++) {
             console.log("i=" + i);
             var item = $("<li>");

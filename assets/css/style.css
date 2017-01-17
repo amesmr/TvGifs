@@ -12,6 +12,21 @@
     left: -271px;
     z-index: -1;
 }
+#add{    
+    position: relative;
+    left: -200px;
+    top: 6px;
+}
+#clear{    
+    position: relative;
+    left: -200px;
+    top: -28px;
+}
+#add,
+#clear, 
+#tv-lucy {
+    display: inline-block;
+}
 body {
     background-color: lightblue;
     -webkit-animation:change 2s infinite; /* Safari 4.0 - 8.0 */
