@@ -1,26 +1,17 @@
 
 #tv {
     position: relative;
-    height: 220px;
-    top:10px;
-    left: 25px;
 }
 #lucy {
     position: relative;
-    height: 165px;
     top: 0;
-    left: -271px;
     z-index: -1;
 }
 #add{    
     position: relative;
-    left: -200px;
-    top: 6px;
 }
 #clear{    
     position: relative;
-    left: -200px;
-    top: -28px;
 }
 #add,
 #clear, 
